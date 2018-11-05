@@ -7,9 +7,10 @@ rect = rs.SurfaceEditPoints(surf_id)
 distance_x = rs.GetReal("Vertical Distance", 0.4)
 filament = rs.GetReal("Filament Diameter",1.75)
 Layerheight = rs.GetReal("Layer Height",0.2)
-extrude_temp = rs.GetReal("Extrude temperture",160)
+extrude_temp = rs.GetReal("Extrude temperture",205)
 bed_temp = rs.GetReal("Bed temperture",60)
 printspeed = rs.GetReal("Print speed",2500)
+multi = rs.GetReal("Extrude multiply",1.0)
 
 width = rect[3]
 
@@ -57,7 +58,7 @@ if line:
         endPoint = rs.CurveEndPoint(crvs[l])
         e_dist = rs.Distance(startPoint,endPoint)
         Evalue = 0
-        Evalue += float(e_dist * distance_x * Layerheight) / float(math.pi * (float(filament/2.0) ** 2))
+        Evalue += float((multi * e_dist * distance_x * Layerheight) / float(math.pi * (float(filament/2.0) ** 2)))
 
         textGcode = "G1 X" + str(endPoint[0]) + " Y" + str(endPoint[1]) + " Z" + str(endPoint[2]) + " F1800\n"
         textGcode += "G1 X" + str(startPoint[0]) + " Y" + str(startPoint[1]) + " Z" + str(startPoint[2]) + " E" + str(Evalue) + " F" + str(printspeed) + "\n"
