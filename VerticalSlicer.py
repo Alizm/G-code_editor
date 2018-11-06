@@ -5,6 +5,7 @@ import codecs
 surf_id = rs.GetObject("Select Surface")
 rect = rs.SurfaceEditPoints(surf_id)
 distance_x = rs.GetReal("Vertical Distance", 0.4)
+height = rs.GetReal("Z height",0.0)
 filament = rs.GetReal("Filament Diameter",1.75)
 Layerheight = rs.GetReal("Layer Height",0.2)
 extrude_temp = rs.GetReal("Extrude temperture",205)
@@ -60,8 +61,8 @@ if line:
         Evalue = 0
         Evalue += float((multi * e_dist * distance_x * Layerheight) / float(math.pi * (float(filament/2.0) ** 2)))
 
-        textGcode = "G1 X" + str(endPoint[0]) + " Y" + str(endPoint[1]) + " Z" + str(endPoint[2]) + " F1800\n"
-        textGcode += "G1 X" + str(startPoint[0]) + " Y" + str(startPoint[1]) + " Z" + str(startPoint[2]) + " E" + str(Evalue) + " F" + str(printspeed) + "\n"
+        textGcode = "G1 X" + str(endPoint[0]) + " Y" + str(endPoint[1]) + " Z" + str(height) + " F1800\n"
+        textGcode += "G1 X" + str(startPoint[0]) + " Y" + str(startPoint[1]) + " Z" + str(height) + " E" + str(Evalue) + " F" + str(printspeed) + "\n"
 
         f.write(textGcode)
 
