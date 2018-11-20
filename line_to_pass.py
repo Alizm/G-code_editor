@@ -2,6 +2,7 @@ import rhinoscriptsyntax as rs
 import math
 import codecs
 
+crvs = rs.GetObjects("Select curves",4)
 distance_x = rs.GetReal("Vertical Distance", 0.4)
 filament = rs.GetReal("Filament Diameter",1.75)
 Layerheight = rs.GetReal("Layer Height",0.2)
@@ -9,7 +10,6 @@ extrude_temp = rs.GetReal("Extrude temperture",205)
 bed_temp = rs.GetReal("Bed temperture",60)
 printspeed = rs.GetReal("Print speed",2500)
 multi = rs.GetReal("Extrude multiply",1.0)
-crvs = rs.ObjectsByType(4, True)
 line_number = (len(crvs))
 filename = rs.SaveFileName("Save", "G-code (*.gcode)|*.gcode||")
 f = codecs.open(filename, 'w', 'utf-8')
