@@ -36,7 +36,7 @@ for l in range(line_number):
 
     textGcode = "G1 X" + str(endPoint[0]) + " Y" + str(endPoint[1]) + " Z" + str(endPoint[2]+0.18) + " F1800\n"
     textGcode += "G1 X" + str(startPoint[0]) + " Y" + str(startPoint[1]) + " Z"+ str(startPoint[2]+ 0.18 )+ " E" + str(Evalue) + " F" + str(printspeed) + "\n"
-    textGcode += "G1 E-1.0000 F1800\n"
+    #textGcode += "G1 E-1.0000 F1800\n"
 
     f.write(textGcode)
 
