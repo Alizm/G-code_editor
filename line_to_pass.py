@@ -17,9 +17,6 @@ f = codecs.open(filename, 'w', 'utf-8')
 f.write('G90\n')
 f.write('M83\n')
 f.write('M106 S0\n')
-#f.write('M106 S60\n')
-#f.write('M104 S205 T0\n')
-#f.write('M109 S205 T0\n')
 f.write('M140 S{0}\n'.format(bed_temp))
 f.write('M104 S{0} T0\n'.format(extrude_temp))
 f.write('M109 S{0} T0\n'.format(extrude_temp))
@@ -27,6 +24,7 @@ f.write('G28\n')
 f.write('G92 E0\n')
 f.write('G1 E-1.0000 F1800\n')
 f.write("G1 Z6.475 F1000\n")
+f.write(";first z = 0.18\n")
 
 
 for l in range(line_number):
@@ -36,8 +34,8 @@ for l in range(line_number):
     Evalue = 0
     Evalue += float(multi * (e_dist * distance_x * Layerheight) / float(math.pi * (float(filament/2.0) ** 2)))
 
-    textGcode = "G1 X" + str(endPoint[0]) + " Y" + str(endPoint[1]) + " Z0.0"+ " F1800\n"
-    textGcode += "G1 X" + str(startPoint[0]) + " Y" + str(startPoint[1]) + " Z0.0"+ " E" + str(Evalue) + " F" + str(printspeed) + "\n"
+    textGcode = "G1 X" + str(endPoint[0]) + " Y" + str(endPoint[1]) + " Z" + str(endPoint[2]+0.18) + " F1800\n"
+    textGcode += "G1 X" + str(startPoint[0]) + " Y" + str(startPoint[1]) + " Z"+ str(startPoint[2]+ 0.18 )+ " E" + str(Evalue) + " F" + str(printspeed) + "\n"
     textGcode += "G1 E-1.0000 F1800\n"
 
     f.write(textGcode)
