@@ -3,7 +3,7 @@ import math
 import codecs
 
 surf_id = rs.GetObject("Select Surface")
-rect = rs.SurfaceEditPoints(surf_id)
+rect_prof = rs.SurfaceEditPoints(surf_id)
 distance_x = rs.GetReal("Vertical Distance", 0.4)
 height = rs.GetReal("Z height",0.0)
 filament = rs.GetReal("Filament Diameter",1.75)
@@ -13,10 +13,10 @@ bed_temp = rs.GetReal("Bed temperture",60)
 printspeed = rs.GetReal("Print speed",2500)
 multi = rs.GetReal("Extrude multiply",1.0)
 
-width = rect[3]
+width = rect_prof[3]
 
 #Line
-line = rs.AddLine(rect[0],rect[1])
+line = rs.AddLine(rect_prof[0],rect_prof[1])
 array_number = int(width[0] // distance_x)
 
 #Array line
@@ -24,8 +24,8 @@ if line:
     i = 0
     for i in range(array_number):
         offset_x = distance_x * i
-        translation = (offset_x, 0, 0)
-        array_line = rs.CopyObject( line, translation )
+        line_copy = (offset_x, 0, 0)
+        array_line = rs.CopyObject( line, line_copy )
 
         # Project down
         results = rs.ProjectCurveToSurface(array_line, surf_id, (0,0,-1))
