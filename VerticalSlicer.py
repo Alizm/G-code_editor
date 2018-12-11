@@ -5,7 +5,7 @@ import codecs
 surf_id = rs.GetObject("Select Surface")
 rect_prof = rs.SurfaceEditPoints(surf_id)
 distance_x = rs.GetReal("Vertical Distance", 0.4)
-height = rs.GetReal("Z height",0.0)
+height = rs.GetReal("Offset Z",0.18)
 filament = rs.GetReal("Filament Diameter",1.75)
 Layerheight = rs.GetReal("Layer Height",0.2)
 extrude_temp = rs.GetReal("Extrude temperture",205)
